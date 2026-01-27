@@ -10,10 +10,25 @@
     "@upstash/redis": "^1.35.0",
     "cors": "^2.8.5",
     "cron": "^4.3.1",
-    "dotenv": "^16.5.0",
-    "express": "^4.21.0"
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
-  }
+  },
+  "name": "sacco-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KelvinKemboi/Sacco-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KelvinKemboi/Sacco-api/issues"
+  },
+  "homepage": "https://github.com/KelvinKemboi/Sacco-api#readme"
 }
