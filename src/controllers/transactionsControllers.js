@@ -1,6 +1,34 @@
 // used to control large number sof code to avoid confusion in larer files
 import {sql} from "../config/db.js"
 
+export async function graphedData(req, res) {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json({ message: "userId is required" });
+    }
+
+    const rows = await sql`
+      SELECT
+        TO_CHAR(created_at, 'YYYY-MM') AS month,
+        COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS income,
+        ABS(COALESCE(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END), 0)) AS expenses
+      FROM transactions
+      WHERE user_id = ${userId}
+      GROUP BY month
+      ORDER BY month
+    `;
+
+    return res.status(200).json({
+      labels: rows.map((r) => r.month),
+      income: rows.map((r) => Number(r.income)),
+      expenses: rows.map((r) => Number(r.expenses)),
+    });
+  } catch (error) {
+    console.log("Error getting graph data", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 export async function getTransactionByUserId (req,res) {
     try{

@@ -3,6 +3,7 @@ import {getTransactionByUserId} from "../controllers/transactionsControllers.js"
 import {getSummaryByUserId} from "../controllers/transactionsControllers.js";
 import {createTransactions} from "../controllers/transactionsControllers.js";
 import {deleteTransactionsByUserId} from "../controllers/transactionsControllers.js"
+import { graphedData } from "../controllers/transactionsControllers.js";
 
 const router= express.Router();
 
@@ -18,5 +19,7 @@ router.post("/", createTransactions)
 // Deleting using user id
 router.delete("/:id", deleteTransactionsByUserId)
   
+//graphed data API
+router.get("/graph/:userId", graphedData);
 
 export default router
